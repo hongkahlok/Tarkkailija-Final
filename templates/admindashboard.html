@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" type="image/png" href="../static/assets/img/favicon.png">
+  <title>
+    Tarkkailija - Admin Dashboard
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+  <link href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" rel="stylesheet">
+  <!-- Nucleo Icons -->
+  <link href="../static/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link href="../static/assets/css/black-dashboard.css" rel="stylesheet" />
+
+</head>
+
+<body class="">
+  <div class="wrapper">
+    <div class="sidebar">
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="active ">
+            <a href="/userdashboard">
+                <i class="tim-icons icon-sound-wave"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li>
+            <a href="/history">
+              <i class="fas fa-database"></i>
+              <p>History</p>
+            </a>
+          </li>
+          <li>
+            <a href="/settings">
+              <i class="fas fa-user"></i>
+              <p>User Settings</p>
+            </a>
+          </li>
+            <li>
+            <a href="/help">
+              <i class="far fa-question-circle"></i>
+              <p>Help</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <div class="navbar-toggle d-inline">
+              <button type="button" class="navbar-toggler">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+              </button>
+            </div>
+              <a href="/"><img src="../static/assets/img/TarkkailijaBanner_small.png"></a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navigation">
+            <ul class="navbar-nav ml-auto">
+              <li class="dropdown nav-item">
+
+                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="true"> {{name}}
+                      <i class="fas fa-user"></i>
+                  <b class="caret d-none d-lg-block d-xl-block"></b>
+                  <p class="d-lg-none">
+
+                  </p>
+                </a>
+                <ul class="dropdown-menu dropdown-navbar">
+                  <li class="nav-link"><a href="/logout" class="nav-item dropdown-item">Log out</a></li>
+                </ul>
+
+              </li>
+              <li class="separator d-block"></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- End Navbar -->
+      <div class="content">
+        <div class="row">
+
+          <div class="col-md-4">
+            <div class="card card-chart">
+              <div class="card-header">
+                <h2 class="card-header"><i class="fas fa-video"></i> Input Feed</h2>
+              </div>
+
+              <div class="card-body">
+                <div class="center">
+{#                    <img src="../static/resize.png">#}
+                    <img src="/video-feed">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-8">
+            <div class="card card-chart">
+              <div class="card-header ">
+                <div class="row">
+                <div class="col-sm-12 text-left">
+                  <h2 class="card-header"><i class="fas fa-users"></i> Live Occupant Count</h2><br>
+               </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart-area" id="data-container" style="height: 319px;">
+                  <canvas id="data-container"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-lg-4">
+            <div class="card card-chart">
+              <div class="card-header">
+                <h4 class="card-title"><i class="fas fa-tachometer-alt"></i>Current Occupant Count</h4>
+                <h3 class="card-title"><span id="currentTotal"></span></h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="card card-chart">
+              <div class="card-header">
+                <h4 class="card-title"><i class="fas fa-door-open"></i>Total In</h4>
+                <h3 class="card-title"><span id="totalIn"></span></h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="card card-chart">
+              <div class="card-header">
+                <h4 class="card-title"><i class="fas fa-door-closed"></i>Total Out</h4>
+                <h3 class="card-title"><span id="totalOut"></span></h3>
+              </div>
+            </div>
+          </div>
+
+        </div>
+  </div>
+
+      <footer class="footer">
+        <div class="container-fluid">
+          <div class="copyright">
+            ©
+            <script>
+              document.write(new Date().getFullYear())
+            </script> made in a <i class="fas fa-dumpster-fire"></i> by
+            <a href="https://github.com/hongkahlok" target="_blank">Hong Kah Lok</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!--   Core JS Files   -->
+  <script src="../static/assets/js/core/jquery.min.js"></script>
+  <script src="../static/assets/js/core/popper.min.js"></script>
+  <script src="../static/assets/js/core/bootstrap.min.js"></script>
+  <script src="../static/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!-- Chart JS -->
+  <script src="../static/assets/js/plugins/chartjs.min.js"></script>
+  <!--  Notifications Plugin    -->
+  <script src="../static/assets/js/plugins/bootstrap-notify.js"></script>
+  <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../static/assets/js/black-dashboard.min.js?v=1.0.0"></script>
+  <script src="../static/assets/demo/demo.js"></script>
+  <script>
+    $(document).ready(function() {
+      $().ready(function() {
+        $sidebar = $('.sidebar');
+        $navbar = $('.navbar');
+        $main_panel = $('.main-panel');
+
+        $full_page = $('.full-page');
+
+        $sidebar_responsive = $('body > .navbar-collapse');
+        sidebar_mini_active = true;
+        white_color = false;
+
+        window_width = $(window).width();
+
+        fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+
+
+
+        $('.fixed-plugin a').click(function(event) {
+          if ($(this).hasClass('switch-trigger')) {
+            if (event.stopPropagation) {
+              event.stopPropagation();
+            } else if (window.event) {
+              window.event.cancelBubble = true;
+            }
+          }
+        });
+
+        $('.fixed-plugin .background-color span').click(function() {
+          $(this).siblings().removeClass('active');
+          $(this).addClass('active');
+
+          var new_color = $(this).data('color');
+
+          if ($sidebar.length != 0) {
+            $sidebar.attr('data', new_color);
+          }
+
+          if ($main_panel.length != 0) {
+            $main_panel.attr('data', new_color);
+          }
+
+          if ($full_page.length != 0) {
+            $full_page.attr('filter-color', new_color);
+          }
+
+          if ($sidebar_responsive.length != 0) {
+            $sidebar_responsive.attr('data', new_color);
+          }
+        });
+
+        $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function() {
+          var $btn = $(this);
+
+          if (sidebar_mini_active == true) {
+            $('body').removeClass('sidebar-mini');
+            sidebar_mini_active = false;
+            blackDashboard.showSidebarMessage('Sidebar mini deactivated...');
+          } else {
+            $('body').addClass('sidebar-mini');
+            sidebar_mini_active = true;
+            blackDashboard.showSidebarMessage('Sidebar mini activated...');
+          }
+
+          // we simulate the window Resize so the charts will get updated in realtime.
+          var simulateWindowResize = setInterval(function() {
+            window.dispatchEvent(new Event('resize'));
+          }, 180);
+
+          // we stop the simulation of Window Resize after the animations are completed
+          setTimeout(function() {
+            clearInterval(simulateWindowResize);
+          }, 1000);
+        });
+
+        $('.switch-change-color input').on("switchChange.bootstrapSwitch", function() {
+          var $btn = $(this);
+
+          if (white_color == true) {
+
+            $('body').addClass('change-background');
+            setTimeout(function() {
+              $('body').removeClass('change-background');
+              $('body').removeClass('white-content');
+            }, 900);
+            white_color = false;
+          } else {
+
+            $('body').addClass('change-background');
+            setTimeout(function() {
+              $('body').removeClass('change-background');
+              $('body').addClass('white-content');
+            }, 900);
+
+            white_color = true;
+          }
+
+
+        });
+
+        $('.light-badge').click(function() {
+          $('body').addClass('white-content');
+        });
+
+        $('.dark-badge').click(function() {
+          $('body').removeClass('white-content');
+        });
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function() {
+      // Javascript method's body can be found in assets/js/demos.js
+      demo.initDashboardPageCharts();
+
+    });
+  </script>
+</body>
+<script src="../static/assets/js/jquery.min.js"></script>
+<script src="../static/assets/js/highcharts.js"></script>
+<script src="../static/assets/js/highcharts-exporting.js"></script>
+<script src="../static/assets/js/flaskChart.js"></script>
+<script type="text/javascript">
+    const intervalID = setInterval(update_values, 100);
+    $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+
+    function update_values() {
+        $.getJSON($SCRIPT_ROOT + '/crowd-data',
+            function (data) {
+                $('#currentTotal').text(data.currentTotal);
+                $('#totalIn').text(data.totalIn);
+                $('#totalOut').text(data.totalOut);
+            })
+    }
+</script>
+
+</html>
